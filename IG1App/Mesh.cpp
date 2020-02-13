@@ -119,4 +119,34 @@ Mesh* Mesh::generaTrianguloRGB(GLdouble rd) {
 
     return triangulo;
 }
+
+Mesh* Mesh::generaRectangulo(GLdouble w, GLdouble h) {
+    Mesh* rectangulo = new Mesh();
+    rectangulo->mNumVertices = 4;
+    rectangulo->mPrimitive = GL_TRIANGLE_STRIP;
+    rectangulo->vVertices.reserve(rectangulo->mNumVertices);
+
+    rectangulo->vVertices.emplace_back(-w, h, 0.0);
+    rectangulo->vVertices.emplace_back(-w, -h, 0.0);
+    rectangulo->vVertices.emplace_back(w, h, 0.0);
+    rectangulo->vVertices.emplace_back(w, -h, 0.0);
+
+    return rectangulo;
+}
+
+Mesh* Mesh::generaRectanguloRGB(GLdouble w, GLdouble h) {
+    Mesh* rectangulo = generaRectangulo(w,h);
+    rectangulo->mPrimitive = GL_TRIANGLE_STRIP;
+
+    //Añade el vector de colores
+    rectangulo->vColors.reserve(rectangulo->mNumVertices);
+    // X axis color: red  (Alpha = 1 : fully opaque)
+    rectangulo->vColors.emplace_back(1.0, 0.0, 0.0, 1.0);
+    // Y axis color: green
+    rectangulo->vColors.emplace_back(0.0, 1.0, 0.0, 1.0);
+    // Z axis color: blue
+    rectangulo->vColors.emplace_back(0.0, 0.0, 1.0, 1.0);
+
+    return rectangulo;
+}
 #pragma endregion

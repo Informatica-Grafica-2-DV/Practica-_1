@@ -109,6 +109,35 @@ void TrianguloRGB::render(glm::dmat4 const& modelViewMat) const {
 	}
 }
 #pragma endregion
+
+#pragma region RectánguloRGB
+
+RectanguloRGB::RectanguloRGB(GLdouble w_, GLdouble h_) :width(w_), height(h_) {
+	mMesh = Mesh::generaRectanguloRGB(width,height);
+}
+
+RectanguloRGB::~RectanguloRGB() {
+	delete mMesh; mMesh = nullptr;
+}
+
+void RectanguloRGB::render(glm::dmat4 const& modelViewMat) const {
+	if (mMesh != nullptr) {
+		dmat4 aMat = modelViewMat * mModelMat;  // glm matrix multiplication
+		upload(aMat);
+		glColor3d(mColor.r, mColor.g, mColor.b);
+		glLineWidth(2);
+		glPolygonMode(GL_FRONT, GL_LINE);
+		mMesh->render();
+
+		//Reseteamos aributos
+		glLineWidth(1);
+		glColor3d(1, 1, 1);
+		glPolygonMode(GL_FRONT, GL_FILL);
+	}
+}
+
+#pragma endregion
+
 #pragma endregion
 //-------------------------------------------------------------------------
  

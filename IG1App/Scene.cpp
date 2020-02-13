@@ -30,6 +30,10 @@ void Scene::init()
 #pragma region Ejercicio3
 	gObjects.push_back(new TrianguloRGB(100));
 #pragma endregion
+#pragma region Ejercicio4
+	gObjects.push_back(new RectanguloRGB(100,200));
+#pragma endregion
+
 }
 //-------------------------------------------------------------------------
 void Scene::free() 

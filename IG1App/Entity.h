@@ -26,6 +26,8 @@ public:
 	
 #pragma region Implementación Enunciado
 	void setMColor(dvec4 newColor) { mColor = newColor; }; //Aplica color a la malla
+	virtual void update() = 0;
+
 #pragma endregion
 protected:
 
@@ -46,6 +48,7 @@ public:
 	explicit EjesRGB(GLdouble l);
 	~EjesRGB();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
+	virtual void update() {};
 };
 
 #pragma region Implementación Enunciado
@@ -58,6 +61,9 @@ public:
 	explicit Poligono(GLuint numL_, GLdouble rd_);
 	~Poligono();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
+	virtual void update() {};
+
+
 };
 
 class Sierpinski : public Abs_Entity
@@ -68,17 +74,25 @@ private:
 public:
 	Sierpinski(GLdouble rd_, GLuint numP_);
 	~Sierpinski();
-	virtual void render(glm::dmat4 const& modelViewMat) const;
+	virtual void render(glm::dmat4 const& modelViewMat) const;	
+	virtual void update() {};
+
 };
 
 class TrianguloRGB : public Abs_Entity
 {
 private:
 	GLdouble rd = 1;
+	//Parametros para el movimiento
+	dvec3 posOriginal{ (0.0, 0.0, 0.0) };
+	dvec3 posCfc{ (0.0,0.0,0.0) };
+	GLdouble angulo = 1.0f;
+	
 public:
 	TrianguloRGB(GLdouble rd_);
 	~TrianguloRGB();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
+	virtual void update();
 };
 
 class RectanguloRGB : public Abs_Entity {
@@ -89,6 +103,8 @@ public:
 	RectanguloRGB(GLdouble w, GLdouble h);
 	~RectanguloRGB();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
+	virtual void update() {};
+
 
 };
 #pragma endregion

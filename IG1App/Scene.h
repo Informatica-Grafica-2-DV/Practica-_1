@@ -24,11 +24,17 @@ public:
 	void init();
 
     void render(Camera const& cam) const;
+#pragma region implementación
+	void update();
+#pragma endregion
 	
 protected:
 	void free();
 	void setGL();
 	void resetGL();
+
+
+
 
 	std::vector<Abs_Entity*> gObjects;  // Entities (graphic objects) of the scene
 };

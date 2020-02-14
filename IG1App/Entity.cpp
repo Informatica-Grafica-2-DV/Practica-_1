@@ -12,6 +12,14 @@ void Abs_Entity::upload(dmat4 const& modelViewMat) const
 	glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixd(value_ptr(modelViewMat));  // transfers modelView matrix to the GPU
 }
+
+#pragma region Implementación
+/*void Abs_Entity::update() {
+
+}*/
+#pragma endregion
+
+
 //-------------------------------------------------------------------------
 //-------------------------------------------------------------------------
 
@@ -108,6 +116,14 @@ void TrianguloRGB::render(glm::dmat4 const& modelViewMat) const {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
 }
+//Se encarga del movimiento
+void TrianguloRGB::update() {
+	angulo++;
+	posCfc.x = 300 * cos(radians(angulo));
+	posCfc.y = 300 * sin(radians(angulo));
+	setModelMat(translate(dmat4(1), posCfc));
+	setModelMat(rotate(modelMat(), radians(angulo * 1.010), dvec3(0.0, 0.0, 1.0)));
+}
 #pragma endregion
 
 #pragma region RectánguloRGB
@@ -126,7 +142,7 @@ void RectanguloRGB::render(glm::dmat4 const& modelViewMat) const {
 		upload(aMat);
 		glColor3d(mColor.r, mColor.g, mColor.b);
 		glLineWidth(2);
-		glPolygonMode(GL_FRONT, GL_LINE);
+		glPolygonMode(GL_BACK, GL_LINE);
 		mMesh->render();
 
 		//Reseteamos aributos

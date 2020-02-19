@@ -122,7 +122,7 @@ void TrianguloRGB::update() {
 	posCfc.x = 300 * cos(radians(angulo));
 	posCfc.y = 300 * sin(radians(angulo));
 	setModelMat(translate(dmat4(1), posCfc));
-	setModelMat(rotate(modelMat(), radians(angulo * 1.010), dvec3(0.0, 0.0, 1.0)));
+	setModelMat(rotate(modelMat(), radians(angulo), dvec3(0.0, 0.0, 1.0)));
 }
 #pragma endregion
 
